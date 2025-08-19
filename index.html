@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Irosha Abeyrathna</title>
+<meta name="description" content="Portfolio website showcasing projects, skills, and contact details of Irosha Abeyrathna." />
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-MuU6Yp3k6+7YpUpkYZi0q3wH0X+5jxL/6XfEXwV7VjPCcR4O3+BPLXENqF0UJfNLh1e3Wv2pVvE3p5E2+tR0bg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+:root {
+  --brand: #2e2e38;
+  --bg: #000000;
+  --text: #f1f5f9;
+  --muted: #cbd5e1;
+  --card: rgba(30,41,59,0.8);
+  --highlight: #ff6ec7;
+  --contact-darkpurple: #5a00b3;
+  --contact-hover: #9c4dff;
+}
+
+/* General */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; display:flex; position:relative; }
+
+/* Moving boxes background */
+#moving-boxes { position:fixed; top:0; left:0; width:100%; height:100%; overflow:hidden; z-index:0; }
+#moving-boxes .box { position:absolute; width:40px; height:40px; background: rgba(77,0,153,0.5); animation: moveBox linear infinite; border-radius: 8px; }
+@keyframes moveBox { 0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity:0; } 10% { opacity:0.5; } 50% { opacity:0.7; } 100% { transform: translateY(-100vh) translateX(500px) rotate(360deg); opacity:0; } }
+
+/* Welcome Screen */
+#welcome {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background: linear-gradient(135deg,#0b0033,#1a004d,#2b0066,#3c0080);
+  display:flex; justify-content:center; align-items:center; flex-direction:column;
+  color:#fff; font-size:2.5rem; font-weight:800; z-index:9999; opacity:1;
+  animation: fadeOutWelcome 1s ease forwards;
+  animation-delay:3s;
+}
+#welcome span {
+  font-size:3rem;
+  background: linear-gradient(90deg, #ff69b4,#ffd700,#1e90ff,#ff69b4);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: rainbowText 2s linear infinite alternate, bounce 1s infinite alternate;
+  margin-top:1rem;
+}
+@keyframes fadeOutWelcome { to { opacity:0; visibility:hidden; } }
+@keyframes bounce { from { transform:translateY(0); } to { transform:translateY(-10px); } }
+@keyframes rainbowText { 0% { background-position:0% 50%; } 100% { background-position:100% 50%; } }
+
+/* Sidebar navigation (transparent) */
+aside.sidebar {
+  position: fixed; right: 0; top: 0; height: 100vh; width: 200px;
+  background: rgba(46,46,56,0.7);
+  backdrop-filter: blur(8px);
+  display: flex; flex-direction: column; justify-content: center; padding: 2rem 1rem;
+  z-index: 1; border-left: 1px solid rgba(255,255,255,0.1);
+}
+aside.sidebar a {
+  color: #fff; text-decoration: none; font-weight: 500; margin: 1rem 0;
+  text-align: center; padding: 0.5rem 1rem; border-radius: 12px;
+  transition: background 0.3s, transform 0.3s;
+}
+aside.sidebar a:hover { background: linear-gradient(90deg,#ff69b4,#1e90ff); transform: scale(1.05); }
+
+/* Main content */
+main { flex:1; margin-right:220px; padding:2rem; position:relative; z-index:1; }
+
+/* Section boxes */
+section { background: var(--card); margin-bottom:2rem; padding:2rem; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.3); transition: transform 0.3s, box-shadow 0.3s; opacity:0; animation: fadeUp 1s ease forwards; }
+section:hover { transform:translateY(-5px) scale(1.02); box-shadow:0 15px 25px rgba(255,105,180,0.6); }
+
+/* Section headings */
+.section-head h2 { font-size:2rem; font-weight:800; margin-bottom:0.5rem; color:#ff69b4; }
+.section-head p { font-size:1rem; color:#cbd5e1; }
+
+/* Hero Section */
+.hero { width:100%; min-height:90vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:2rem; border-radius:20px; }
+.hero-container { display:flex; align-items:center; justify-content:center; gap:3rem; max-width:1200px; flex-wrap:wrap; position:relative; z-index:2; }
+.hero-image img { width:250px; height:250px; border-radius:50%; object-fit:cover; transform: scale(0); animation: popImage 1s forwards; animation-delay:0.5s; box-shadow:0 15px 30px rgba(0,0,0,0.5); }
+.hero-text { max-width:600px; }
+.hero-text h1 { font-size:2.8rem; font-weight:800; background: linear-gradient(90deg, #ff69b4, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: fadeSlide 1s forwards; opacity:0; transform: translateX(-50px); }
+.typing-text { color:#fff; font-size:1.2rem; margin:0.5rem 0 1rem 0; white-space:nowrap; overflow:hidden; border-right:3px solid #ff69b4; width:0; animation: typing 4s steps(60) forwards, blink 0.75s step-end infinite; }
+.hero-text .lead { font-size:1rem; color:#f0f0f0; margin-bottom:1rem; opacity:0; transform:translateX(-30px); animation: fadeSlide 1s forwards; animation-delay:1.5s; }
+.hero-buttons .btn { margin-right:1rem; opacity:0; transform:translateY(20px); animation: bounceIn 0.8s forwards; animation-delay:2s; }
+
+/* Hero Animations */
+@keyframes popImage { from { transform: scale(0); opacity:0; } to { transform: scale(1); opacity:1; } }
+@keyframes fadeSlide { to { opacity:1; transform: translateX(0); } }
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+@keyframes bounceIn { 0% { transform: translateY(20px); opacity:0; } 60% { transform: translateY(-10px); opacity:1; } 100% { transform: translateY(0); opacity:1; } }
+
+/* Background gradient animation */
+.hero::before { content: ''; position:absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(270deg, #4d0099, #1e90ff, #ff69b4, #ffd700); background-size: 800% 800%; animation: gradientBG 15s ease infinite; z-index:1; border-radius:20px; opacity:0.4; }
+@keyframes gradientBG { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
+
+/* Buttons */
+.btn { display:inline-block; padding:0.5rem 1rem; border-radius:30px; text-decoration:none; font-weight:600; margin-top:1rem; transition: all 0.3s; }
+.btn.primary { background: #ff69b4; color:#fff; }
+.btn.ghost { border:2px solid #ff69b4; color:#ff69b4; }
+.btn.primary:hover { background:#ff1493; transform:scale(1.05); }
+.btn.ghost:hover { background:#ff69b4; color:#fff; transform:scale(1.05); }
+
+/* Hero Social Icons */
+.hero-social { margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* space between icon and text */
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  background: linear-gradient(120deg,#ff69b4,#1e90ff);
+  color: #fff;
+  font-size: 1rem;
+  transition: transform 0.3s, background 0.3s;
+  text-decoration: none;
+}
+.hero-social a:hover {
+  transform: scale(1.1);
+  background: linear-gradient(120deg,#ffd700,#ff69b4);
+}
+
+/* Skills row */
+.skills-row { display:flex; gap:0.5rem; overflow-x:auto; padding:1rem 0; }
+.skills-row .skill { flex:0 0 auto; background: linear-gradient(120deg,#ff69b4,#1e90ff); color:#fff; padding:0.5rem 0.8rem; border-radius:12px; text-align:center; font-weight:500; transition: transform 0.3s; }
+.skills-row .skill:hover { transform:scale(1.1) rotate(-2deg); }
+
+/* Projects horizontal */
+.projects-row { display:flex; gap:1rem; overflow-x:auto; padding:1rem 0; }
+.project-card { flex:0 0 250px; border:2px solid #ff69b4; background: rgba(46,46,56,0.85); padding:1rem; border-radius:15px; text-align:center; }
+.project-card img { width:100%; border-radius:12px; margin-bottom:0.5rem; transition: transform 0.3s; }
+.project-card img:hover { transform:scale(1.05) rotate(1deg); }
+.project-card h3 { font-size:1.2rem; font-weight:700; color:#ff69b4; margin-bottom:0.3rem; }
+.project-card p { font-size:0.9rem; color:#cbd5e1; }
+
+/* Contact links */
+.contact-info { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.contact-info a { color: var(--contact-darkpurple); text-decoration: none; font-weight: 600; font-size: 1rem; transition: color 0.3s; }
+.contact-info a:hover { color: var(--contact-hover); }
+.social-links a { background: linear-gradient(120deg,#ff69b4,#1e90ff); color:#fff; padding:0.4rem 1rem; border-radius:20px; margin-right:0.5rem; display:inline-block; transition: transform 0.3s; }
+.social-links a:hover { transform:scale(1.05); }
+
+/* Footer */
+footer { text-align:center; padding:2rem; background: var(--brand); color:#fff; }
+
+/* Fade Up for sections */
+@keyframes fadeUp { from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+
+<div id="moving-boxes">
+  <div class="box" style="left:10%; animation-duration:20s; width:30px; height:30px;"></div>
+  <div class="box" style="left:30%; animation-duration:25s; width:40px; height:40px;"></div>
+  <div class="box" style="left:50%; animation-duration:22s; width:50px; height:50px;"></div>
+  <div class="box" style="left:70%; animation-duration:28s; width:35px; height:35px;"></div>
+  <div class="box" style="left:85%; animation-duration:30s; width:45px; height:45px;"></div>
+</div>
+
+<div id="welcome">
+  Welcome to <span>Irosha's Portfolio</span>
+</div>
+
+<aside class="sidebar">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#resume">Resume</a>
+  <a href="#contact">Contact</a>
+</aside>
+
+<main>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-container">
+    <div class="hero-image">
+      <img src="irosha01.jpg" alt="Irosha">
+    </div>
+    <div class="hero-text">
+      <h1>I'm <span>Irosha Abeyrathna</span></h1>
+      <p class="typing-text">a Software Engineer, Web, Front-end & Back-end Developer.</p>
+      <p class="lead">I build clean, scalable, and user-friendly web applications from scratch to deployment.</p>
+      <div class="hero-buttons">
+        <a class="btn primary" href="#projects">View Projects</a>
+        <a class="btn ghost" href="mailto:irosha16378@gmail.com">Contact Me</a>
+      </div>
+      <!-- Updated Social Icons with Names -->
+      <div class="hero-social">
+        <a href="https://www.facebook.com/share/16yk2S6zsW/ " target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a href="https://www.linkedin.com/in/irosha-abeyrathna-929402338?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+        <a href="https://www.instagram.com/irosha_14?igsh=MXMzbzg4NHB3dmJtcQ==" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="mailto:irosha16378@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-head"><h2>About</h2><p>Short intro about me.</p></div>
+  <p>Hello! I'm <strong>Irosha</strong>, a passionate Software Engineer and Web Developer specializing in front-end and back-end development. I create clean, scalable, and user-friendly web applications.</p>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-head"><h2>Skills</h2><p>Tools & technologies I work with</p></div>
+  <div class="skills-row">
+    <div class="skill">HTML</div>
+    <div class="skill">CSS</div>
+    <div class="skill">JavaScript</div>
+    <div class="skill">React</div>
+    <div class="skill">Node.js</div>
+    <div class="skill">Figma</div>
+    <div class="skill">Git</div>
+    <div class="skill">SQL</div>
+    <div class="skill">Python</div>
+    <div class="skill">Tailwind</div>
+    <div class="skill">Next.js</div>
+    <div class="skill">AWS</div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-head"><h2>Featured Projects</h2></div>
+  <div class="projects-row">
+    <article class="project-card"><img src="p01.jpg" alt="portfolio"><h3>Portfolio Website</h3><p>A fully personal portfolio website designed and developed by me to showcase my skills, projects, and professional journey. It features a modern, responsive design, interactive sections, smooth animations, and an organized layout to provide visitors with a clear overview of my work.</p></article>
+    <article class="project-card"><img src="p02.jpg" alt="Web App"><h3>Web App</h3><p>Developed a responsive full-stack web application with user authentication, CRUD operations, and real-time data handling. Tools & Technologies: HTML, CSS, JavaScript, React (frontend), Node.js & Express (backend), MongoDB (database), Git (version control), and deployed on AWS</p></article>
+    <article class="project-card"><img src="p03.jpg" alt="UI/UX"><h3>UI/UX Design</h3><p>Creative UI/UX designs crafted using Figma, focusing on intuitive navigation, visually appealing layouts, and seamless user experiences. Each design emphasizes usability, aesthetic consistency, and user-centric interactions for web and mobile applications.</p></article>
+  </div>
+</section>
+
+<!-- Resume -->
+<section id="resume">
+  <div class="section-head"><h2>Resume</h2><p>Education</p></div>
+  <p>Sabaragamuwa University of Sri Lanka — Faculty of Computing — Undergraduate</p>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-head"><h2>Contact</h2><p>Let's work together</p></div>
+  <p>Have a project in mind or want to say hi? Reach me via email or phone.</p>
+  <div class="contact-info">
+    <a href="mailto:irosha16378@gmail.com">Email: irosha16378@gmail.com</a>
+    <a href="tel:+94701496613">Contact: +94 701 496 613</a>
+  </div>
+  <div class="social-links">
+    <a href="https://www.linkedin.com/in/your-linkedin" target="_blank">LinkedIn</a>
+    <a href="https://github.com/your-github" target="_blank">GitHub</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>© <span id="year">2025</span> Built by Irosha</p>
+</footer>
+
+</body>
+</html>
+
